@@ -7,7 +7,6 @@ const database = 'MondongoCorp';
 
 use('MondongoCorp');
 
-
 // Más fácil y rápido crear las colecciones con validaciones directamente // No nos enseñaron así, pero uno aprende trucos bby
 db.createCollection("empleados", {
     validator: {
@@ -172,7 +171,7 @@ db.empleados.insertMany([
         run: "12345678-9",
         email: "juan.perez@empresa.cl",
         activo: "S",
-        fecha_contratacion: ISODate("2023-01-15") // = SYSDATE
+        fecha_contratacion: ISODate("2023-01-15")
     },
     {
         _id: 2,
@@ -184,7 +183,7 @@ db.empleados.insertMany([
         run: "98765432-1",
         email: "maria.lopez@empresa.cl",
         activo: "S",
-        fecha_contratacion: ISODate("2022-03-20") // = SYSDATE
+        fecha_contratacion: ISODate("2022-03-20")
     }
 ]);
 
@@ -222,6 +221,9 @@ db.productos.insertOne({
 });
 
 //Creando Ventas
+// Clientes existe dentro de las ventas pero no posee una colección propia
+// esto porque no es una colección que se utilice de manera frecuente, en SQL existe proque debe haber una normalización de datos
+// acá podría obtener a los clientes mediante consultas a las ventas directamente
 db.ventas.insertOne({
     _id: 1,
     fecha_venta: ISODate("2024-09-15"),
@@ -293,7 +295,7 @@ db.ventas.insertOne({
 //Buscando y actualizando (Read, Update)
 //MondongoCorp no sabe que la venta 2 está relacionada al producto 3
 //se lo tenemos que decir nosotros, entonces si queremos actualizar el stock
-//Es necesario realizar dos pasos: 
+//Es necesario realizar dos pasos:
 // 1ero obtener el producto de la venta
 // 2do usar ese valor para actualizar el stock
 
